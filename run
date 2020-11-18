@@ -4,6 +4,7 @@ set -e
 
 usage(){
     echo "$0 [ tests | setup ]"
+    exit 0
 }
 
 _tests() {
@@ -19,7 +20,10 @@ _tests() {
     echo Starting nodes...
     for i in {1..5}; do (locust --worker &>>logs/nodes.log &) ; done
 
-    echo Done.
+    echo "\
+
+Done test start-up. Check the logs for additional information.
+"
 }
 
 _setup() {
@@ -35,6 +39,8 @@ Setup done 👍
 Run \". .venv/bin/activate\" to activate Python virtual environment on project directory ($PWD)
 "
 }
+
+[ $# -gt 1 ] && usage
 
 case "$1" in
 	tests|setup)

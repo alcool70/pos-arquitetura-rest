@@ -47,4 +47,34 @@ class WebsiteUser(HttpUser):
 
 #### Arquitetura
 
-O script [`run.sh`](./run.sh) cria uma instância primária do Locust, baseando-se na configuração presente no arquivo [`main.conf`](./main.conf). Logo após, inicializa 5 instâncias secundárias do Locust, que se comunicam com a primária, permitindo assim, paralelizar até 100 usuários, 20 em cada instância secundária criada. Este script grava *logs* de execução para a instâncias primária e secundárias na pasta `logs` e registra o resultado da execução dos testes em arquivos CSV na pasta `results`.
+Locust permite trabalhar em linha de comando ou como biblioteca. Nesse momento, usaremos o modo de linha de comando, passando para o Locust um arquivo de configuração. Com isso, podemos versionar essa configuração, de forma a possibilitar um histórico da mesma.
+
+Executamos uma instância primária do Locust com a seguinte linha:
+
+```bash
+locust  --config=main.conf &>>logs/main.log  &
+------  -------- --------- ---------------- ---
+   1        2        3             4         5
+```
+Para as instâncias secundárias, executamos a seguinte linha:
+```bash
+for i in {1..5}; do (locust --worker &>>logs/nodes.log  & ) ; done
+-------------------  ------ -------- ----------------- ---  ------
+        6               1       7            4          5      6
+```
+
+**Legenda**
+* 1: comando para executar o locust
+* 2: argumento para indicar um arquivo de configuração
+* 3: valor do argumento `--config`
+* 4: redireção do `shell`, para enviar o texto do terminal para um arquivo.
+* 5: execução em *background*
+* 6: estrutura de repetição (`for`) para *bash script*
+* 7: argumento para instanciar o locust de forma secundária
+
+#### Helper Script
+
+O *helper script* [`run`](./run) aceita dois argumentos mutuamente exclusivos:
+
+* `setup` (`run setup`): prepara o ambiente para desenvolvimento, criando um `venv`, de forma que os pacotes usados pelo projeto estejam disponíveis apenas para ele, não comprometendo assim os pacotes do sistema operacional, caso Linux.
+* `tests` (`run tests`): cria uma instância primária do Locust, baseando-se na configuração presente no arquivo [`main.conf`](./main.conf). Logo após, inicializa 5 instâncias secundárias do Locust, que se comunicam com a primária, permitindo assim, paralelizar até 100 usuários, 20 em cada instância secundária criada. Este script grava *logs* de execução para as instâncias primária e secundárias na pasta `logs` e registra o resultado da execução dos testes em arquivos CSV na pasta `results`.

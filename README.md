@@ -77,4 +77,5 @@ for i in {1..5}; do (locust --worker &>>logs/nodes.log  & ) ; done
 O *helper script* [`run`](./run) aceita dois argumentos mutuamente exclusivos:
 
 * `setup` (`run setup`): prepara o ambiente para desenvolvimento, criando um `venv`, de forma que os pacotes usados pelo projeto estejam disponíveis apenas para ele, não comprometendo assim os pacotes do sistema operacional, caso Linux.
+
 * `tests` (`run tests`): cria uma instância primária do Locust, baseando-se na configuração presente no arquivo [`main.conf`](./main.conf). Logo após, inicializa 5 instâncias secundárias do Locust, que se comunicam com a primária, permitindo assim, paralelizar até 100 usuários, 20 em cada instância secundária criada. Este script grava *logs* de execução para as instâncias primária e secundárias na pasta `logs` e registra o resultado da execução dos testes em arquivos CSV na pasta `results`.

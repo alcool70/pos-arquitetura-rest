@@ -16,6 +16,6 @@ Repositório para práticas da disciplina ministrada pelo professor Ms Ricardo R
 
 #### Adordagens
 
-Na branch [locust](pos-arquitetura-rest/tree/locust), estudamos a abordagem programática, usando Python, com a biblioteca Locust.
+Na branch [locust](https://github.com/alcool70/pos-arquitetura-rest/tree/locust), estudamos a abordagem programática, usando Python, com a biblioteca Locust.
 
-Na branch [jmeter](pos-arquitetura-rest/tree/jmeter), usamos a ferramenta da Apache, o JMeter.
+Na branch [jmeter](https://github.com/alcool70/pos-arquitetura-rest/tree/jmeter), usamos a ferramenta da Apache, o JMeter.

@@ -12,13 +12,14 @@ _tests() {
         echo Activate virtual environment for this project running \"run setup\"
         return 1
     fi
+
     echo Starting main instance...
-    locust --config=main.conf &>>logs/main.log &
+    locust --config=configs/main.conf &>logs/main.log &
 
     sleep 2
 
     echo Starting nodes...
-    for i in {1..5}; do (locust --worker &>>logs/nodes.log &) ; done
+    for i in {1..5}; do (locust --config=configs/nodes.conf &>logs/node$i.log &) ; done
 
     echo "\
 
@@ -30,8 +31,8 @@ _setup() {
     [ ! -d ".venv" ] && python3 -m venv .venv
     . .venv/bin/activate
     pip install -r requirements.txt
-    sleep 3
     echo "\
+
 
 __________
 

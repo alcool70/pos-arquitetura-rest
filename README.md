@@ -14,8 +14,9 @@ Repositório para práticas da disciplina ministrada pelo professor Ms Ricardo R
 * [Igor Mendes](https://github.com/igormendes)
 * [Victor Demétrio](https://github.com/victordemetrio)
 
-#### Adordagens
-
-Na branch [locust](https://github.com/alcool70/pos-arquitetura-rest/tree/locust), estudamos a abordagem programática, usando Python, com a biblioteca Locust.
-
-Na branch [jmeter](https://github.com/alcool70/pos-arquitetura-rest/tree/jmeter), usamos a ferramenta da Apache, o JMeter.
+#### Abordagens
+* #### Performance/carga
+  * Na branch [locust](https://github.com/alcool70/pos-arquitetura-rest/tree/locust), estudamos a abordagem programática, usando Python, com a biblioteca Locust.
+  * Na branch [jmeter](https://github.com/alcool70/pos-arquitetura-rest/tree/jmeter), usamos a ferramenta da Apache, o JMeter.
+* #### REST API
+  * Na branch [rest](https://github.com/alcool70/pos-arquitetura-rest/tree/rest), usamos a biblioteca Java [REST-assured](https://rest-assured.io). O projeto usa a linguagem [Kotlin](https://kotlinlang.org).

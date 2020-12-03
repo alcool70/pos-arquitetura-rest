@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.4.20"
+    kotlin("plugin.serialization") version "1.4.20"
 }
 
 repositories {
@@ -15,6 +16,9 @@ dependencies {
 
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    // Kotlinx.serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
 
     // Use jUnit 5
     testImplementation(platform("org.junit:junit-bom:5.7.0"))

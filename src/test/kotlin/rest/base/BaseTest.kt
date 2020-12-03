@@ -5,6 +5,7 @@ import io.restassured.config.RedirectConfig.redirectConfig
 import io.restassured.config.RestAssuredConfig.config
 import io.restassured.filter.log.RequestLoggingFilter
 import io.restassured.filter.log.ResponseLoggingFilter
+import io.restassured.parsing.Parser
 import org.junit.jupiter.api.BeforeAll
 
 open class BaseTest {
@@ -21,6 +22,8 @@ open class BaseTest {
                                         .maxRedirects(3)
                         );
             RestAssured.filters(RequestLoggingFilter(), ResponseLoggingFilter())
+            // TODO insert headers for each request
+            RestAssured.defaultParser = Parser.JSON
             RestAssured.baseURI = "https://swapi.dev"
             RestAssured.basePath = "api"
 //            RestAssured.rootPath = "api"

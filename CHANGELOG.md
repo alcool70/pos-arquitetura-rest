@@ -1,5 +1,13 @@
 # CHANGELOG
 
+- 05/Dez/2020 16:20:49
+  - Inserted a new file for requests to Viacep API;
+    - protocol: **https**
+    - server name: **viacep.com.br**
+    - path: various
+    - threads(users): 100, 500, 1000, 5000
+    - loop count: 3
+    
 - 05/Dez/2020 09:31:49
   - Inserted a new file for requests to ReqRes.in API;
     - protocol: **https**

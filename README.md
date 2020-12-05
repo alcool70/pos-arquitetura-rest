@@ -47,4 +47,16 @@ Repositório para práticas da disciplina ministrada pelo professor Ms Ricardo R
         }
     }
     ```
-     
+* #### Execução
+    Para executar o projeto, e observar os resultados do teste, o seguinte comando deve ser dado:
+    
+    * **Windows**: no prompt de comando:
+    
+        ```cmd
+        gradlew.bat test
+        ```
+    * **Linux**: no terminal:
+    
+        ```bash
+        ./gradlew test
+        ```

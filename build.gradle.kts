@@ -35,6 +35,9 @@ tasks.test {
     testLogging {
         events("passed", "skipped", "failed")
     }
+    systemProperties["junit.jupiter.execution.parallel.enabled"] = true
+    systemProperties["junit.jupiter.execution.parallel.mode.default"] = "concurrent"
+    maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 }
 
 tasks.withType<KotlinCompile>().configureEach {

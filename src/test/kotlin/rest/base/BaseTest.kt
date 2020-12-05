@@ -15,12 +15,12 @@ open class BaseTest {
         @JvmStatic
         fun setupAll() {
             RestAssured.config = config()
-                        .redirect(
-                                redirectConfig()
-                                        .followRedirects(true)
-                                        .and()
-                                        .maxRedirects(3)
-                        );
+                .redirect(
+                    redirectConfig()
+                        .followRedirects(true)
+                        .and()
+                        .maxRedirects(3)
+                );
             RestAssured.filters(RequestLoggingFilter(), ResponseLoggingFilter())
             // TODO insert headers for each request
             RestAssured.defaultParser = Parser.JSON

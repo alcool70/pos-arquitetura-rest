@@ -4,11 +4,14 @@ import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import org.apache.http.HttpStatus
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.equalTo
-import org.hamcrest.Matchers.greaterThan
+import org.hamcrest.Matchers.*
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import rest.base.BaseTest
+import kotlin.collections.LinkedHashMap
+
 
 class SWApiTest : BaseTest() {
 
@@ -85,5 +88,57 @@ class SWApiTest : BaseTest() {
 //        println(luke.javaClass)
 
 //        assertThat(luke.birthYear, equalTo("19BBY"))
+    }
+
+    @Test
+    fun `check if all the movies have at least ten characters`() {
+        val resp = When {
+            get("/films")
+        } Then {
+            statusCode(HttpStatus.SC_OK)
+            body("count", greaterThan(0))
+        }
+
+        val filmsMap = resp.extract().response().jsonPath().getList<Any>("results")
+
+        assertFalse(filmsMap.isEmpty())
+
+        filmsMap.forEach {
+            filme -> assertThat(filme, instanceOf(LinkedHashMap::class.java))
+            val map = filme as LinkedHashMap<*,*>
+            var list = map.get("characters")
+
+            assertThat(list, instanceOf(List::class.java))
+
+            list = list as List<*>
+            assertThat(list.size, greaterThan(10))
+        }
+    }
+
+    @Test
+    fun `check if human is listed as a species`() {
+        val resp = When {
+            get("/species")
+        } Then {
+            statusCode(HttpStatus.SC_OK)
+            body("count", greaterThan(0))
+        }
+
+        val speciesMap = resp.extract().response().jsonPath().getList<Any>("results")
+
+        assertFalse(speciesMap.isEmpty())
+
+        var especiesNome = mutableListOf<String>()
+
+        speciesMap.forEach {
+            especie -> assertThat(especie, instanceOf(LinkedHashMap::class.java))
+            val map = especie as LinkedHashMap<*,*>
+            var nome = map.get("name")
+
+            assertThat(nome, instanceOf(String::class.java))
+            especiesNome.add(nome as String)
+        }
+
+        assertTrue(especiesNome.contains("Human"))
     }
 }
